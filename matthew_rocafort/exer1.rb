@@ -1,5 +1,5 @@
 class Domain
-  attr_accessor :dom_name, :registration_date, :expiration_date
+  attr_accessor :dom_name, :registration_date, :expiration_date, :user
 
   RESTRICTED_DOMAINS = [
     'google.com.ph',
@@ -22,57 +22,36 @@ class Domain
     'organization.org.ph'
   ]
 
-  REGISTERED_DOMAINS = []
+  REGISTERED_DOMAINS = [
+  ]
 
-  def initialize(dom_name, registration_date, expiration_date)
+  AVAILABLE_PRODUCTS = [
+    'Gsuite',
+    'cPanel',
+    'Web Design'
+  ]
+
+  def initialize(dom_name, registration_date, expiration_date, user)
     self.dom_name = dom_name
     self.registration_date = registration_date
     self.expiration_date = expiration_date
+    self.user = user
   end
 
-  def search
-    if !RESTRICTED_DOMAINS.include?(dom_name)
-      'Domain available.'
-      #get user choice
-      #if a, register
-      #if b, search again
-      puts "Please choose a or b"
-      case gets.chomp
-      when "a"
-        'Register'
-      when "b"
-        'Search'
-      else
-        nil
-      end
-    else
-      'Domain unavailable.'
-    end
+  def check_search
+    !RESTRICTED_DOMAINS.include?(dom_name)
   end
 
   def check_minimum
-  	#self.dom_name.index('.')
-    if self.dom_name.length < 3
-      'Too short.'
-    else
-      'Domain has minimum of 3 characters.'
-    end
+    self.dom_name.length >= 3
   end
 
   def check_double_dash
-    if self.dom_name.include?("--")
-      '-- not allowed'
-    else
-      'Domain has no --.'
-    end
+    !self.dom_name.include?("--")
   end
 
   def check_spaces
-    if self.dom_name.include?(" ")
-      'Space/s not allowed'
-    else
-      'Domain has no space/s.'
-    end
+    !self.dom_name.include?(" ")
   end
 
   def check_pure_numbers
@@ -94,17 +73,51 @@ class Domain
       puts 'Domain does not start or end with -.'
     end
   end
+
+  def check_date_difference(date2, date1)
+    puts ((date2 - date1).to_f / 365 * 12).round
+  end
+
+  def valid_domain
+    self.check_minimum && self.check_double_dash && self.check_spaces
+  end
 end
+
+
+
+#puts 'Enter a registration date.'
+#registration_date_temp = gets.chomp
+
+#puts 'Enter an expiration date.'
+#expiration_date_temp = gets.chomp
+
+#puts "domain:" + dom_name_temp
+#dom = Domain.new(dom_name_temp, registration_date_temp, expiration_date_temp)
+#puts dom.search
+
 
 puts "Enter a domain name."
 dom_name_temp = gets.chomp
 
-puts 'Enter a registration date.'
-registration_date_temp = gets.chomp
+dom = Domain.new(dom_name_temp, nil, nil, nil)
 
-puts 'Enter an expiration date.'
-expiration_date_temp = gets.chomp
+if dom.check_search
+  puts 'available'
+  if dom.valid_domain
+    puts 'valid'
+    #provide valid dates
 
-#puts "domain:" + dom_name_temp
-dom = Domain.new(dom_name_temp, registration_date_temp, expiration_date_temp)
-puts dom.search
+    puts 'Enter a registration date.'
+    registration_date_temp = gets.chomp
+
+    puts 'Enter an expiration date.'
+    expiration_date_temp = gets.chomp
+
+    dom.check_date_difference(registration_date_temp.to_date, expiration_date_temp.to_date)
+
+  else
+    puts 'invalid'
+  end
+else
+  puts 'unavailable'
+end
