@@ -55,25 +55,24 @@ unavailable_domains = [
 ]
 
 unavailable_domains.each do |domains|
-	domain = Domain.new(domains, Time.new(2020,06,22), Time.new(2021,06,22))
+	today = Time.now();
+	domain = Domain.new(domains, Time.now(), Time.now())
 	domain.register
 end
 
 
 puts "Search Domain name"
-name = gets
+name = gets.chomp
 
 if name.length < 3
 	puts "Please enter atleast 3 characters"
 else
 	puts "How long do you want to register your domain?"
 	puts "[1] 3 months, [2] 1 year, [3] 2 years, [4] 5 years, [5] 10 years"
-	date = gets
+	date = gets.chomp
+	
+	duration = [+ 3.months, + 1.year, + 2.year, + 5.year, + 10.year]
 
-	case date
-
-	when date == 1
-		expiration_date = Time.now()
 
 	domain = Domain.new(name, Time.new(2020,06,22), Time.new(2021,06,22))
 	domain.register
