@@ -1,3 +1,5 @@
+
+
 class Domain
   attr_accessor :dom_name
 
@@ -31,6 +33,51 @@ class Domain
       'Domain available.'
     else
       'Domain unavailable.'
+    end
+  end
+
+  def check_minimum
+  	#self.dom_name.index('.')
+    if self.dom_name.length < 3
+      'Too short.'
+    else
+      'Domain has minimum of 3 characters.'
+    end
+  end
+
+  def check_double_dash
+    if self.dom_name.include?("--")
+      '-- not allowed'
+    else
+      'Domain has no --.'
+    end
+  end
+
+  def check_spaces
+    if self.dom_name.include?(" ")
+      'Space/s not allowed'
+    else
+      'Domain has no space/s.'
+    end
+  end
+
+  def check_pure_numbers
+    if /\A[-+]?\d+\z/ === self.dom_name
+      'Pure integers not allowed'
+    else
+      'Domain is not purely integers'
+    end
+  end
+
+  def check_start_and_end
+    if self.dom_name.start_with?("-") && self.dom_name.end_with?("-")
+      'Cannot start and end with -.'
+    elsif self.dom_name.start_with?("-")
+      'Cannot start with -.'
+    elsif self.dom_name.end_with?("-")
+      'Cannot end with -.'
+    else
+      'Domain does not start or end with -.'
     end
   end
 end
