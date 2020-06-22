@@ -1,4 +1,5 @@
 class Domain
+  require 'Date'
   attr_accessor :dom_name, :registration_date, :expiration_date, :user
 
   RESTRICTED_DOMAINS = [
@@ -74,8 +75,15 @@ class Domain
     end
   end
 
-  def check_date_difference(date2, date1)
-    puts ((date2 - date1).to_f / 365 * 12).round
+  def check_date_difference(registration_date, expiration_date)
+    date_diff = Date.strptime(expiration_date, "%m/%d/%Y") - Date.strptime(registration_date, "%m/%d/%Y")
+    diff = (date_diff.to_i/30.417).round
+
+    if diff == 3 || diff == 12 || diff == 24 || diff == 60 || diff == 120
+      puts 'valid months'
+    else
+      puts diff.to_s + " months is invalid"
+    end
   end
 
   def valid_domain
@@ -113,7 +121,7 @@ if dom.check_search
     puts 'Enter an expiration date.'
     expiration_date_temp = gets.chomp
 
-    dom.check_date_difference(registration_date_temp.to_date, expiration_date_temp.to_date)
+    dom.check_date_difference(registration_date_temp, expiration_date_temp)
 
   else
     puts 'invalid'
