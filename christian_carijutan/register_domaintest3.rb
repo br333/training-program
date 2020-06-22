@@ -23,19 +23,18 @@ class Register
 
         integer = choice.to_i
         if integer == 1
-             
+          expiration_date + 3.months
+          DOMAINS.push(self)
         elsif integer == 2
-                
-            
+          expiration_date + 12.months
+           DOMAINS.push(self)
         elsif integer == 3
-
-            
+          expiration_date + 24.months
+          DOMAINS.push(self)
         elsif integer == 4
-
-
+          expiration_date + 36.months
+          DOMAINS.push(self)
         end
 
-
-        DOMAINS.push(self)
       end
 end
