@@ -56,4 +56,10 @@ registered.each do |registered_domain|
 end
 
 
+puts "Search Domain name"
+name = gets
+
+
+
+
 
