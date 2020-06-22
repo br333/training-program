@@ -69,13 +69,13 @@ class Domain
 
   def check_start_and_end
     if self.dom_name.start_with?("-") && self.dom_name.end_with?("-")
-      'Cannot start and end with -.'
+      puts 'Cannot start and end with -.'
     elsif self.dom_name.start_with?("-")
-      'Cannot start with -.'
+      puts 'Cannot start with -.'
     elsif self.dom_name.end_with?("-")
-      'Cannot end with -.'
+      puts 'Cannot end with -.'
     else
-      'Domain does not start or end with -.'
+      puts 'Domain does not start or end with -.'
     end
   end
 end
@@ -84,4 +84,5 @@ puts "Enter a domain name."
 dom_name_temp = gets
 
 #puts "domain:" + dom_name_temp
-Domain.new(dom_name_temp).check_pure_numbers
+dom = Domain.new(dom_name_temp)
+dom.check_start_and_end
