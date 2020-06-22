@@ -55,9 +55,13 @@ registered.each do |registered_domain|
 	domain.register
 end
 
-
+# get domain name
 puts "Search Domain name"
 name = gets
+# validate domain name
+ 	
+
+
 
 
 
