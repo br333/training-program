@@ -1,12 +1,12 @@
 
-
+REGISTERED_DOMAINS = []
 
 
 
 class Domain
     attr_accessor :name, :reg_date, :exp_date
 
-    REGISTERED_DOMAINS = []
+    
 
     def initialize(name, reg_date, exp_date)
         self.name = name
@@ -19,25 +19,19 @@ class Domain
     # end
 
     def register
-        if !REGISTERED_DOMAINS.map(&:name).include?(name)
             REGISTERED_DOMAINS.push(self)
-        else
-            REGISTERED_DOMAINS.each do |domain_object|
-                break domain_object.expiration_date if domain_object.name == name
-            end
-        end
     end
-
-
-    def search(name)
-        if !REGISTERED_DOMAINS.map(&:name).include?(name)
-            puts "That domain name is available"
-        else
-            puts "That domain name is unavailable"
-        end
-    end 
-
 end
+
+    
+def search(search)
+    if !REGISTERED_DOMAINS.map(&:name).include?(search)
+            puts "That domain name is available"
+    else
+        puts "That domain name is unavailable"
+    end
+end 
+
 
 domain1 = Domain.new('google.com.ph', Time.new(2020,1,1), Time.new(2021,1,1))
 domain1.register
@@ -60,4 +54,9 @@ domain1.register
 # domain18 = ('organization.org.ph', 2020,1,1, 2021,1,1)
 puts "Please input a domain name: "
 name = gets.chomp()
-name.search
+
+if name.length < 3
+    puts "Domain name should have more than 3 characters."
+else
+    search(name)
+end

@@ -14,10 +14,9 @@ def self.is_available?(name)
 	!REGISTERED_DOMAINS.map(&:name).include?(name)
 end
 
-def search(domain)
-	if self.class.is_available?(domain)
-	  	# REGISTERED_DOMAINS.push(self)
-	  	'Domain is available'
+def register
+	if self.class.is_available?(name)
+	  	REGISTERED_DOMAINS.push(self)
 	else
 	  	# REGISTERED_DOMAINS.map(&:name).select{ |domain| domain == name }
 	  	REGISTERED_DOMAINS.each do |domain_object|
@@ -26,10 +25,15 @@ def search(domain)
 	end
 end
 
+def show
+	REGISTERED_DOMAINS
 end
 
+end
 
-registered = [
+domain = Domain.new('google.com', '2020-01-01', '2021-01-01')
+
+unavailable_domains = [
 	'google.com.ph',
 	'google.ph',
 	'watercup.net.ph',
@@ -50,15 +54,30 @@ registered = [
 	'organization.org.ph'
 ]
 
-registered.each do |registered_domain|
-	domain = Domain.new(registered_domain, Time.new(2020,06,22), Time.new(2021,06,22))
+unavailable_domains.each do |domains|
+	domain = Domain.new(domains, Time.new(2020,06,22), Time.new(2021,06,22))
 	domain.register
 end
 
-# get domain name
+
 puts "Search Domain name"
 name = gets
-# validate domain name
+
+if name.length < 3
+	puts "Please enter atleast 3 characters"
+else
+	puts "How long do you want to register your domain?"
+	puts "[1] 3 months, [2] 1 year, [3] 2 years, [4] 5 years, [5] 10 years"
+	date = gets
+
+	case date
+
+	when date == 1
+		expiration_date = Time.now()
+
+	domain = Domain.new(name, Time.new(2020,06,22), Time.new(2021,06,22))
+	domain.register
+end
  	
 
 
