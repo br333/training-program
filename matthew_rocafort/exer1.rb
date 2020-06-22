@@ -107,17 +107,6 @@ class Domain
   end
 end
 
-#puts 'Enter a registration date.'
-#registration_date_temp = gets.chomp
-
-#puts 'Enter an expiration date.'
-#expiration_date_temp = gets.chomp
-
-#puts "domain:" + domain_name_temp
-#dom = Domain.new(domain_name_temp, registration_date_temp, expiration_date_temp)
-#puts dom.search
-
-
 puts 'Please enter your name. (TYPE "exit" to quit)'
 user_name_temp = gets.chomp
 
@@ -144,8 +133,10 @@ while user_name_temp != 'exit' do
         #check if dates entered are valid
         if dom.check_date_difference(registration_date_temp, expiration_date_temp)
           #register the domain and ask user if he/she wants to register a product
-          Domain::REGISTERED_DOMAINS.push(dom.domain_name, registration_date_temp, expiration_date_temp, user_name_temp)
-          puts 'Do you want to register a product under this domain?'
+          Domain::REGISTERED_DOMAINS.push(Domain.new(dom.domain_name, registration_date_temp, expiration_date_temp, user_name_temp))
+          puts 'Successfully pushed ' + dom.domain_name.to_s + '. See updated domain list below.'
+          puts Domain::REGISTERED_DOMAINS.map(&:domain_name)
+          puts 'Do you want to register a product under this domain? (y/n)'
         else
           puts 'You have entered an invalid registration and expiration date.'
         end
