@@ -3,24 +3,26 @@ class Domain
 
   RESTRICTED_DOMAINS = [
     'google.com.ph',
-	'google.ph',
-	'watercup.net.ph',
-	'watr.com.ph',
-	'water.ph',
-	'water.com.ph',
-	'googlemask.ph',
-	'go0gl3mask.ph',
-	'goglemaske.com.ph',
-	'wheninrome.com.ph',
-	'wheninrone.com.ph',
-	'iotechnologies.com.ph',
-	'itlog.ph',
-	'i0tehnologies.com.ph',
-	'waiter.com.ph',
-	'lenvovo.org.ph',
-	'orgnanization.org.ph',
-	'organization.org.ph'
+    'google.ph',
+    'watercup.net.ph',
+    'watr.com.ph',
+    'water.ph',
+    'water.com.ph',
+    'googlemask.ph',
+    'go0gl3mask.ph',
+    'goglemaske.com.ph',
+    'wheninrome.com.ph',
+    'wheninrone.com.ph',
+    'iotechnologies.com.ph',
+    'itlog.ph',
+    'i0tehnologies.com.ph',
+    'waiter.com.ph',
+    'lenvovo.org.ph',
+    'orgnanization.org.ph',
+    'organization.org.ph'
   ]
+
+  REGISTERED_DOMAINS = []
 
   def initialize(dom_name, registration_date, expiration_date)
     self.dom_name = dom_name
@@ -31,6 +33,18 @@ class Domain
   def search
     if !RESTRICTED_DOMAINS.include?(dom_name)
       'Domain available.'
+      #get user choice
+      #if a, register
+      #if b, search again
+      puts "Please choose a or b"
+      case gets.chomp
+      when "a"
+        'Register'
+      when "b"
+        'Search'
+      else
+        nil
+      end
     else
       'Domain unavailable.'
     end
@@ -83,13 +97,13 @@ class Domain
 end
 
 puts "Enter a domain name."
-dom_name_temp = gets
+dom_name_temp = gets.chomp
 
 puts 'Enter a registration date.'
-registration_date_temp = gets
+registration_date_temp = gets.chomp
 
 puts 'Enter an expiration date.'
-expiration_date_temp = gets
+expiration_date_temp = gets.chomp
 
 #puts "domain:" + dom_name_temp
 dom = Domain.new(dom_name_temp, registration_date_temp, expiration_date_temp)
