@@ -71,12 +71,15 @@ else
 	puts "[1] 3 months, [2] 1 year, [3] 2 years, [4] 5 years, [5] 10 years"
 	date = gets.chomp
 	
-	duration = [+ 3.months, + 1.year, + 2.year, + 5.year, + 10.year]
+	durations = [+ 3.months, + 1.year, + 2.year, + 5.year, + 10.year]
 
 
 	domain = Domain.new(name, Time.new(2020,06,22), Time.new(2021,06,22))
 	domain.register
 end
+
+
+
  	
 
 
