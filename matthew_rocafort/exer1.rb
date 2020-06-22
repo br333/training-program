@@ -1,5 +1,3 @@
-
-
 class Domain
   attr_accessor :dom_name
 
@@ -81,3 +79,9 @@ class Domain
     end
   end
 end
+
+puts "Enter a domain name."
+dom_name_temp = gets
+
+#puts "domain:" + dom_name_temp
+Domain.new(dom_name_temp).check_pure_numbers
