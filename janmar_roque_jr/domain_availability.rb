@@ -23,6 +23,7 @@ class Domain
     end
 end
 
+<<<<<<< HEAD
 is_available = false
 def search(search)
     if !REGISTERED_DOMAINS.map(&:name).include?(search)
@@ -48,6 +49,17 @@ def reg
         domain = Domain.new(name, reg_date, (reg_date + 3.months))
     end
 end
+=======
+    
+def search(search)
+    if !REGISTERED_DOMAINS.map(&:name).include?(search)
+            puts "That domain name is available"
+    else
+        puts "That domain name is unavailable"
+    end
+end 
+
+>>>>>>> 94203027793fd7c03835625a505d2a88aa251b5f
 
 
 domain1 = Domain.new('google.com.ph', Time.new(2020,1,1), Time.new(2021,1,1))
@@ -76,6 +88,7 @@ domain1.register
 puts "Please input a domain name: "
 name = gets.chomp()
 
+<<<<<<< HEAD
 if name.length < 3 and name.include?('-') and name.length > 63
     puts "Domain name invalid."
 else
@@ -88,3 +101,10 @@ end
 
 # puts "Please input registration length(year/s): "
 # years = gets.chomp()
+=======
+if name.length < 3
+    puts "Domain name should have more than 3 characters."
+else
+    search(name)
+end
+>>>>>>> 94203027793fd7c03835625a505d2a88aa251b5f
