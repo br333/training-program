@@ -5,12 +5,13 @@ class Register
         {  "name" => "pinterest.com.ph", "registration_date" =>  Time.new(2021 , 1 , 12), "expiration_date" =>  Time.new(2022, 1, 12)} 
     ]
 
-   attr_accessor :name, :registration_date, :expiration_date
+   attr_accessor :name, :registration_date, :expiration_date, :services
 
       def initialize(name, registration_date, expiration_date)
         self.name              = name
         self.registration_date = registration_date
         self.expiration_date   = expiration_date
+        self.services = nil
       end
 
       def self.is_available?(name)
@@ -65,6 +66,7 @@ class Register
               print "Please enter your domain: \n"
               domain = gets
           end
-        end
+      end
+
 
 end
