@@ -30,7 +30,11 @@ class Domain
     REGISTERED_DOMAINS = []
   
     def initialize(name, registration_date, expiration_date, user)
-      self.name              = name
+      if(count(name) < 3) 
+        self.name              = name
+      else
+        puts 'domain name must be greater than 3'
+      end 
       self.registration_date = registration_date
       self.expiration_date   = expiration_date
       self.user              = user
@@ -77,6 +81,7 @@ newDomain = Domain.new(name, Time.new(registration_date), Time.new(expiration_da
 newDomain.register
 
 
-
+### Intermediate (Domain Validation) 20 mins
+2. Domain names must have at least 3 characters (not including the extension) and a maximum of 63 (excluding the extension). Characters allowed are [a-z], [0-9] and [-]. Domains must not start or end with a dash [-] or have simultaneous dashes, and must not contain embedded spaces. Names with only numeric characters will not be accepted. Valid extensions are ph, com.ph, net.ph, and org.ph.
 
   
